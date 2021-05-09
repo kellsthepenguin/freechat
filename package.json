@@ -1,0 +1,14 @@
+{
+  "name": "freechat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jwkim101201/freechat.git",
+  "author": "jwkim101201",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.0.2"
+  }
+}
