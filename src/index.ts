@@ -5,3 +5,5 @@ import express from 'express'
 const app = express()
 
 app.use(require('./router/api'))
+
+app.listen(8080)
