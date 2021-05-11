@@ -1,24 +1,44 @@
 import { Router, Request, Response } from 'express'
+import { sha256 } from 'js-sha256'
+
+import fs from 'fs'
+import jwt from 'jsonwebtoken'
+
+import { db } from '../global'
 
 const router = Router()
 
-router.get('/token', (req: Request, res: Response) => {
+const ERROR_OBJS = {
+  UNAUTHORIZED: {
+    error: 401,
+    msg: 'Unauthorized',
+    token: null
+  }
+}
+
+
+router.get('/token', async (req: Request, res: Response) => {
   const {
     mail, 
     pw
   } = req.body
 
-  if (!mail && pw) {
+  if (!mail && pw) return res.json(ERROR_OBJS.UNAUTHORIZED)
+
+  const user: {
+    mail: string,
+    salt: string,
+    pw: string
+  } = (await db('users').where('mail', mail))[0]
+
+  if (!user) return res.json(ERROR_OBJS.UNAUTHORIZED)
+  if (sha256(user.salt + pw) === pw) {
     return res.json({
-      error: 401,
-      msg: 'Unauthorized',
-      token: null
+      token: jwt.sign({ mail }, fs.readFileSync('../../resources/private.key').toString('utf8'))
     })
   }
 
-  res.json({
-    token: '이것도 준비 안됐다고.'
-  })
+  res.json(ERROR_OBJS.UNAUTHORIZED)
 })
 
 router.get('/groups', (req: Request, res: Response) => {
