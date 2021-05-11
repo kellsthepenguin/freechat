@@ -9,6 +9,8 @@
   "devDependencies": {},
   "dependencies": {
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.4",
     "socket.io": "^4.0.2"
   }
 }
