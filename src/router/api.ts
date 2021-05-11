@@ -1,8 +1,8 @@
-const { Router } = require('express')
+import { Router, Request, Response } from 'express'
 
 const router = Router()
 
-router.get('/token', (req, res) => {
+router.get('/token', (req: Request, res: Response) => {
   const {
     mail, 
     pw
@@ -21,7 +21,7 @@ router.get('/token', (req, res) => {
   })
 })
 
-router.get('/groups', (req, res) => {
+router.get('/groups', (req: Request, res: Response) => {
   res.send('으쯔라고요 준비 안됐다고.')
 })
 

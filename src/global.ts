@@ -1,10 +1,10 @@
-// 변수노예
-const knex = require('knex')
+import knex, { Knex } from 'knex'
 
-module.exports = {
-  /**
-   * @type {knex.Knex}
-   */
+interface Global {
+  knex: Knex
+}
+
+const global: Global = {
   knex: knex({
     client: 'mysql',
     connection: {
@@ -13,3 +13,5 @@ module.exports = {
     }
   })
 }
+
+export default global
