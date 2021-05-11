@@ -1,17 +1,11 @@
-import knex, { Knex } from 'knex'
+import knex from 'knex'
 
-interface Global {
-  knex: Knex
-}
+const db = knex({
+  client: 'mysql',
+  connection: {
+    user: 'freechat',
+    database: 'freechat'
+  }
+})
 
-const global: Global = {
-  knex: knex({
-    client: 'mysql',
-    connection: {
-      user: 'freechat',
-      database: 'freechat'
-    }
-  })
-}
-
-export default global
+export { db }
