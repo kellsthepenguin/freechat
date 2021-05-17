@@ -13,6 +13,20 @@ const ERROR_OBJS = {
     error: 401,
     msg: 'Unauthorized',
     token: null
+  },
+
+  MORE_BODY_REQUIRES(...bodys: string[]) {
+    let strBodys = ''
+
+    bodys.forEach((val, i) => { 
+      if (i === bodys.length) return strBodys += `'${val}'`
+      strBodys += `'${val}' `
+    })
+
+    return {
+      error: 400,
+      msg: `More body(${strBodys}) requires`
+    }
   }
 }
 
@@ -23,7 +37,7 @@ router.get('/token', async (req: Request, res: Response) => {
     pw
   } = req.body
 
-  if (!mail && pw) return res.json(ERROR_OBJS.UNAUTHORIZED)
+  if (!mail && pw) return res.json(ERROR_OBJS.MORE_BODY_REQUIRES('mail', 'pw'))
 
   const user: {
     mail: string,
