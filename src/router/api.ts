@@ -89,8 +89,4 @@ router.get('/token', async (req: Request, res: Response) => {
   res.json(ERROR_OBJS.UNAUTHORIZED)
 })
 
-router.get('/groups', (req: Request, res: Response) => {
-  res.send('으쯔라고요 준비 안됐다고.')
-})
-
 export default router
