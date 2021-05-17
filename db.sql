@@ -1,6 +1,6 @@
-create user freechat@localhost
-create database freechat
-use freechat
+create user freechat@localhost;
+create database freechat;
+use freechat;
 
 create table users (
     id int,
@@ -9,7 +9,7 @@ create table users (
     profileImg text,
     salt text,
     pw text
-)
+);
 
 create table messages (
     idx int,
