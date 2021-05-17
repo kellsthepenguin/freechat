@@ -30,6 +30,40 @@ const ERROR_OBJS = {
   }
 }
 
+function genSalt () {
+  let salt = ''
+
+  for (let i = 0; i < 50; i++) {
+    salt += String.fromCharCode(Math.floor(Math.random() * 65535))
+  }
+  
+  return salt
+}
+
+router.post('/register', async (req: Request, res: Response) => {
+  const {
+    mail,
+    pw
+  } = req.body
+
+  if (!mail && pw) return res.json(ERROR_OBJS.MORE_BODY_REQUIRES('mail', 'pw'))
+
+  const salt = genSalt()
+
+  const user: IUser = {
+    mail,
+    salt,
+    pw
+  }
+
+  db('users')
+    .insert(user)
+    .then(() => {
+      res.json({
+        code: 200
+      })
+    })
+})
 
 router.get('/token', async (req: Request, res: Response) => {
   const {
