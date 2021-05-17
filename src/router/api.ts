@@ -73,11 +73,7 @@ router.get('/token', async (req: Request, res: Response) => {
 
   if (!mail && pw) return res.json(ERROR_OBJS.MORE_BODY_REQUIRES('mail', 'pw'))
 
-  const user: {
-    mail: string,
-    salt: string,
-    pw: string
-  } = (await db('users').where('mail', mail))[0]
+  const user: IUser = (await db('users').where('mail', mail))[0]
 
   if (!user) return res.json(ERROR_OBJS.UNAUTHORIZED)
   if (sha256(user.salt + pw) === pw) {
