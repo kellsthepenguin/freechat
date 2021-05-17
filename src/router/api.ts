@@ -53,7 +53,7 @@ router.post('/register', async (req: Request, res: Response) => {
   const user: IUser = {
     mail,
     salt,
-    pw
+    pw: sha256(salt + pw)
   }
 
   db('users')
