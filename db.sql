@@ -1,4 +1,5 @@
 create user freechat@localhost;
+grant all privileges on freechat.* to freechat@localhost;
 create database freechat;
 use freechat;
 
