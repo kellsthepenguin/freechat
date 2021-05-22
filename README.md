@@ -1,3 +1,3 @@
 # Freechat
 
-이게 뭘까
+moved to <a href="https://github.com/stck-dev/phrase">stck-dev/phrase</a>
